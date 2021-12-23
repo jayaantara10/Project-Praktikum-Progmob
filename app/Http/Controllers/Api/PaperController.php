@@ -83,11 +83,11 @@ class PaperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $data = \App\Paper::where('id', $id)->get();
+        $data = \App\Paper::where('id', $request->id)->first();
 
-        if(count($data)>0){
+        if($data){
             return response()->json([
                 'message'=>'succes',
                 'values'=> $data
@@ -98,6 +98,8 @@ class PaperController extends Controller
                 'message'=>'Failed'
             ]);
         }
+
+        
     }
 
     /**
@@ -118,7 +120,7 @@ class PaperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $judul = $request->input('judul');
         $jenis = $request->input('jenis');
@@ -129,7 +131,7 @@ class PaperController extends Controller
         $deskripsi = $request->input('deskripsi');
         $id_user = $request->input('id_user');
 
-        $data = \App\Paper::where('id', $id)->first();
+        $data = \App\Paper::where('id', $request->id)->first();
         $data->judul=$judul;
         $data->jenis=$jenis;
         $data->penulis=$penulis;
@@ -158,9 +160,9 @@ class PaperController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $data = \App\Paper::where('id', $id)->first();
+        $data = \App\Paper::where('id', $request->id)->first();
         if($data->delete()){
             return response()->json([
                 'message'=>'succes',

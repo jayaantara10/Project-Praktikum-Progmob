@@ -32,7 +32,7 @@ Route::middleware(['auth:api'])->group(function(){
 });
 
 Route::get('paper', 'Api\PaperController@index');
-Route::get('paper/{id}', 'Api\PaperController@show');
+Route::post('paper/item', 'Api\PaperController@show');
 Route::post('paper/store', 'Api\PaperController@store');
-Route::post('paper/update/{id}', 'Api\PaperController@update');
-Route::post('paper/delete/{id}', 'Api\PaperController@destroy');
+Route::post('paper/update', 'Api\PaperController@update');
+Route::post('paper/delete', 'Api\PaperController@destroy');
